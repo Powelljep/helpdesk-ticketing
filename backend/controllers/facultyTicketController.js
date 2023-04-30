@@ -1,0 +1,1 @@
+const facultyTicketModel = require("../models/facultyTicketModel");
