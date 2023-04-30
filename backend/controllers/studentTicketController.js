@@ -1,10 +1,12 @@
 const StudentTicketModel = require("../models/studentTicketModel");
 
-// Getting all details about the student tickets
-const getAllStudentTckets = (req, res) => {
-  StudentTicketModel.find()
-    .then((data) => {
-      res.status(200).json(data);
+// Getting specific  student ticket
+const getOneStudentTicket = (req, res) => {
+  StudentTicketModel.findOne({
+    _id: req.params.id,
+  })
+    .then((ticket) => {
+      res.status(200).json(ticket);
     })
     .catch((err) => {
       res.status(400).json({
@@ -13,13 +15,11 @@ const getAllStudentTckets = (req, res) => {
     });
 };
 
-// Getting specific  student ticket
-const getOneStudentTicket = (req, res) => {
-  StudentTicketModel.findOne({
-    _id: req.params.id,
-  })
-    .then((ticket) => {
-      res.status(200).json(ticket);
+// Getting all details about the student tickets
+const getAllStudentTckets = (req, res) => {
+  StudentTicketModel.find()
+    .then((data) => {
+      res.status(200).json(data);
     })
     .catch((err) => {
       res.status(400).json({

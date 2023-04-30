@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 const studentTicketRoutes = require("./routes/studentTicketRouter");
+const facultyTicketRoutes = require("./routes/facultyTicketRoutes");
 
 
 // Connection to MongoDB
@@ -20,6 +21,7 @@ app.use(express.static('assets'))
 app.use(express.json()) // To parse the incoming requests with JSON payloads
 
 app.use("/api/student-tickets", studentTicketRoutes);
+app.use("/api/faculty-tickets", facultyTicketRoutes);
 
 
 module.exports = app ;
