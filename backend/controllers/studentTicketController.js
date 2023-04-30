@@ -1,11 +1,10 @@
 const StudentTicketModel = require("../models/studentTicketModel");
+
 // Getting all details about the student tickets
 const getAllStudentTckets = (req, res) => {
   StudentTicketModel.find()
     .then((data) => {
-      res.status(200).json(
-        data
-      );
+      res.status(200).json(data);
     })
     .catch((err) => {
       res.status(400).json({
@@ -57,45 +56,54 @@ const postStudentTicket = (req, res) => {
 
 //updating student ticket
 const updateStudentTicket = (req, res) => {
-    const ticket = new StudentTicketModel({
-        _id: req.params.id,
-        name: req.body.name,
-        problem: req.body.problem,
-        description: req.body.description,
-        priorityLevel: req.body.priorityLevel,
-        onOffCampus: req.body.onOffCampus,
-    });
+  const ticket = new StudentTicketModel({
+    _id: req.params.id,
+    name: req.body.name,
+    problem: req.body.problem,
+    description: req.body.description,
+    priorityLevel: req.body.priorityLevel,
+    onOffCampus: req.body.onOffCampus,
+  });
 
-    StudentTicketModel.updateOne({
-        _id: req.params.id
-    }, ticket)
-    .then((response => {
-        res.status(201).json({
-            message: "successfully created",
-            data: response
-        })
-    }))
+  StudentTicketModel.updateOne(
+    {
+      _id: req.params.id,
+    },
+    ticket
+  )
+    .then((response) => {
+      res.status(201).json({
+        message: "successfully created",
+        data: response,
+      });
+    })
     .catch((err) => {
-        res.status(400).json({
-            err
-        })
+      res.status(400).json({
+        err,
+      });
     });
-}
+};
 
 //deleting student ticket
 const deleteOneStudentTicket = (req, res, next) => {
-    StudentTicketModel.deleteOne({
-        _id: req.params.id
+  StudentTicketModel.deleteOne({
+    _id: req.params.id,
+  })
+    .then((response) => {
+      res.status(200).json({
+        message: "Ticket Successfully deleted",
+        data: response,
+      });
     })
-    .then(response => {
-        res.status(200).json({
-            message: "Ticket Successfully deleted",
-            data: response
-        })
-    })
-    .catch(err => {
-        res.status(400).json({err})
+    .catch((err) => {
+      res.status(400).json({ err });
     });
-}
+};
 
-module.exports = { getOneStudentTicket, getAllStudentTckets, postStudentTicket, updateStudentTicket, deleteOneStudentTicket}
+module.exports = {
+  getOneStudentTicket,
+  getAllStudentTckets,
+  postStudentTicket,
+  updateStudentTicket,
+  deleteOneStudentTicket,
+};
